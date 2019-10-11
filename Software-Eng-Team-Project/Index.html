@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Welcome!</title>
+    <link rel="stylesheet" type="text/css" href="treeMainStyle.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js">
+    </script>
+    <script type="text/javascript">
+        $("select").on("click" , function() {
+  
+        $(this).parent(".select-box").toggleClass("open");
+        
+        });
+
+        $(document).mouseup(function (e)
+        {
+            var container = $(".select-box");
+
+            if (container.has(e.target).length === 0)
+            {
+                container.removeClass("open");
+            }
+        });
+
+
+        $("select").on("change" , function() {
+        
+        var selection = $(this).find("option:selected").text(),
+            labelFor = $(this).attr("id"),
+            label = $("[for='" + labelFor + "']");
+            
+        label.find(".label-desc").html(selection);
+            
+        });
+     </script>
+  </head>
+  <body background="back2.jpg">
+    <div class="navigation-bar">
+    <div id="navigation-container">
+
+   <img src="PicsArt_10-05-10.27.58.jpg" width="70" height="70">
+
+    <ul>
+      <li><a href="#">Main</a></li>
+      <li><a href="#">Log In</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Get in Touch</a></li>
+    </ul>
+  </div>
+
+
+  <div>
+    <div class="main-content">
+            <form action="#">
+ 
+                    <div class="select-box">
+                      
+                      <label for="select-box1" class="label select-box1"><span class="label-desc">Choose your country</span> </label>
+                      <select id="select-box1" class="select">
+                        <option value="Choice 1">Falkland Islands</option>
+                        <option value="Choice 2">Germany</option>
+                        <option value="Choice 3">Neverland</option>
+                      </select>
+                      
+                    </div>
+                     
+                  </form>
+    </div>
+   </div>
+    </div>
+
+  </body>
+</html>
