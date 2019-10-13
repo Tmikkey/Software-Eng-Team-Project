@@ -5,8 +5,42 @@
     <meta charset="utf-8">
     <title>Welcome!</title>
     <link rel="stylesheet" type="text/css" href="treeMainStyle.css">
+    <style>
+      body, html {
+        height: 100%;
+       margin: 0;
+    }
+    .bg {
+        /* The image used */
+        background-image: url("back.jpg");
+
+        /* Full height */
+        height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .input_field{
+        width: 100%;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-image: url('search.png');
+        background-position: 1px 1px; 
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;}
+    
+    }
+    
+    
+     </style>
   </head>
-  <body background="back.jpg"; background-repeat: no-repeat;>
+  <body class="bg">
+
     <div class="navigation-bar">
     <div id="navigation-container">
 
@@ -19,18 +53,15 @@
       <li><a href="#">Get in Touch</a></li>
     </ul>
   </div>
-
-
   <div>
-
-
     <div class="main-content">
       <div class="ticket">
         <div class="ticket__main">
           <div class="header">treenatree</div>
           <div class="info passenger">
             <div class="info__item">Passenger</div>
-            <div class="info__detail">name in</div>
+            <input class="input_field" type="text" value="" 
+            placeholder="Passenger Name" autocomplete="off">
           </div>
         <!--  <div class="info platform"> <span>Depart </span><span>from </span><span>platform</span>
             <div class="number">
@@ -40,15 +71,18 @@
           </div>-->
           <div class="info departure">
             <div class="info__item">Depart</div>
-            <div class="info__detail">input</div>
+            <input class="input_field" type="text" value="" 
+            placeholder="input" autocomplete="off">
           </div>
           <div class="info arrival">
             <div class="info__item">Arrive</div>
-            <div class="info__detail">input</div>
+            <input class="input_field" type="text" value="" 
+            placeholder="input" autocomplete="off">
           </div>
           <div class="info date">
             <div class="info__item">Date</div>
-            <div class="info__detail">input</div>
+            <input class="input_field" type="text" value="" 
+            placeholder="input" autocomplete="off">
           </div>
           <div class="info time">
             <div class="info__item">Time</div>
@@ -59,7 +93,7 @@
             <div class="info__detail">__</div>
           </div>
           <div class="info seat">
-            <div class="info__item">Seat</div>
+            <div class="infox__item">Seat</div>
             <div class="info__detail">__</div>
           </div>
           <div class="fineprint">
@@ -101,7 +135,6 @@
     </div>
 </div>
   <section class="Ticket">
-
   </section>
   </body>
 </html>
