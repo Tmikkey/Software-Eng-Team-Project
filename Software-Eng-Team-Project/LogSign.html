@@ -8,12 +8,14 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js">
     </script>
     <script>
-        $(".info-item .btn").click(function(){
+        $(document).ready(function() {
+          $(".info-item .btn").click(function(){
   $(".container").toggleClass("log-in");
 });
 $(".container-form .btn").click(function(){
   $(".container").addClass("active");
 });
+        })
     </script>
    </head>
    <body> 
