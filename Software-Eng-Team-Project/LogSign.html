@@ -59,7 +59,7 @@
                 $("#info").fadeOut();
                 $("#login").html("Sending...");
                 }, success: function(resp) {
-                if (reps=='ok') {
+                if (resp=='ok') {
                   $("#login").html("<img src = 'ajax-loader.gif' width = '15'/> &nbsp: Login");
                 } else {
                   $("#info").fadeIn(1000, function() {

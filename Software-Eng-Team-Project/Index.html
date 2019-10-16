@@ -5,18 +5,90 @@
     <meta charset="utf-8">
     <title>Welcome!</title>
     <link rel="stylesheet" type="text/css" href="treeMainStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js">
     </script><script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.js"></script>
+    <script>
+    var myViewModel;
+    var response = '[{"rank":"9","content":"Alon","UID":"5"},{"rank":"6","content":"Tala","UID":"6"}]';
+    $(document).ready(function() {
+          var overlay = $('<div id="overlay"></div>');
+          overlay.show();
+          overlay.appendTo(document.body);
+          $('.popup').show();
+          $('.close').click(function(){
+            $('.popup').hide();
+              updateItem();
+            overlay.appendTo(document.body).remove();
+           
+            return false;
+          });
+          $('.x').click(function(){
+            $('.popup').hide();
+            overlay.appendTo(document.body).remove();
+            return false;
+          });
+        
+    myViewModel = { from: ko.observable(undefined),to: ko.observable(undefined), 
+                    arrTime: ko.observable(undefined), depTime: ko.observable(undefined)
+    };
+    ko.applyBindings(myViewModel);
+    
+    function updateItem() {
+// convert string to JSON
+var jsonData = '[{"rank":"9","content":"Alon","UID":"5"},{"rank":"6","content":"Tala","UID":"6"}]';
+
+// $.ajax({
+//     url: '/echo/json/',
+//     type: 'POST',
+//     data: {
+//         json: jsonData
+//     },
+//     success: function (response) {
+//         var trHTML = '';
+//         $.each(response, function (i, item) {
+//             trHTML += '<tr><td>' + item.rank + '</td><td>' + item.content + '</td><td>' + item.UID + '</td></tr>';
+//         });
+//         $('#records_table').append(trHTML);
+//     }
+// });
+var trHTML = '';
+        $.each(response, function (i, item) {
+            trHTML += '<tr><td>' + item.rank + '</td><td>' + item.content + '</td><td>' + item.UID + '</td></tr>';
+        });
+        $('#records_table').append(trHTML);
+    }
+    function updateItem1() {
+        $.ajax({
+            url : 'myservlet',
+            dataType : 'json',
+            success : function(response) {
+            $.each(response, function(i, item) {
+            var $tr = $('<tr>').append(
+            $('<td>').text(item.from),
+            $('<td>').text(item.to),
+            $('<td>').text(item.arrTime),
+            $('<td>').text(item.depTime)
+        ); //.appendTo('#records_table');
+        console.log($tr.wrap('<p>').html());
+    });
+            }
+        });
+    }
+     
+});
+    </script>
      <style>
        body, html {
         height: 100%;
         margin: 0;
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     }
 
     .bg {
-        /* The image used */
-        background-image: url("back.jpg");
-
+        /* The image used 
+        background-image: url("back3.jpg");
+*/
         /* Full height */
         height: 100%;
 
@@ -60,6 +132,7 @@
          padding: 15px 35px;
          border-radius: 5px;
          box-shadow: 0 2px 5px #000;
+         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
        }
        .cnt223 p{
          clear: both;
@@ -83,6 +156,21 @@
        .cnt223 .x:hover{
          cursor: pointer;
        }
+       #rcorners1 {
+    /**background-color: white;**/
+    margin-top: -15pt;
+  margin-bottom: 10pt;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+.text-center{
+    width: 100%;
+}
+.btn-success2 {
+        color: #fff;
+        background-color: #000000;
+        border-color: #ff0000;
+        }
+         
      </style>
   </head>
   <body  class="bg">
@@ -98,23 +186,30 @@
       <li><a href="#">Get in Touch</a></li>
     </ul>
   </div>
+  <div id="rcorners1">
+      <div class="text-center">
+          <h1>Search the routes</h1>
+      </div>
+      <div class="text-center" >
+  
+      <form class="form-inline">
+          <div class="form-group">
+              <label for="exampleInputName2">From</label>
+              <input type="text" class="form-control" id="exampleInputName2" placeholder="From">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputEmail2">To</label>
+              <input type="text" class="form-control" id="exampleInputEmail2" placeholder="To">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputDate2">Date</label>
+              <input type="date" class="form-control" id="exampleInputEmail2" placeholder="Date">
+          </div>
+          <button type="submit" class="btn btn-success2">Send</button>
+      </form>
+      </div>
       <script type='text/javascript'>
-        $(function(){
-          var overlay = $('<div id="overlay"></div>');
-          overlay.show();
-          overlay.appendTo(document.body);
-          $('.popup').show();
-          $('.close').click(function(){
-            $('.popup').hide();
-            overlay.appendTo(document.body).remove();
-            return false;
-          });
-          $('.x').click(function(){
-            $('.popup').hide();
-            overlay.appendTo(document.body).remove();
-            return false;
-          });
-        });
+     
       </script>
       <div class='popup'>
         <div class='cnt223'>
@@ -233,7 +328,14 @@
 
 
     </div>
-  <div class="bg"></div>
+    <table id="records_table" border='1'>
+        <tr>
+            <th>Rank</th>
+            <th>Content</th>
+            <th>UID</th>
+        </tr>
+    </table>
+  <div></div>
 
   </body>
 </html>
