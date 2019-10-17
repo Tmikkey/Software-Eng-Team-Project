@@ -37,7 +37,8 @@
     function updateItem() {
 // convert string to JSON
 var jsonData = '[{"rank":"9","content":"Alon","UID":"5"},{"rank":"6","content":"Tala","UID":"6"}]';
-
+var response = '[{"rank":"9","content":"Alon","UID":"5"},{"rank":"6","content":"Tala","UID":"6"}]';
+response = $.parseJSON(response);
 // $.ajax({
 //     url: '/echo/json/',
 //     type: 'POST',
@@ -82,13 +83,14 @@ var trHTML = '';
        body, html {
         height: 100%;
         margin: 0;
+        width: 100%;
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     }
 
     .bg {
-        /* The image used 
+        /* The image used */
         background-image: url("back3.jpg");
-*/
+
         /* Full height */
         height: 100%;
 
@@ -114,6 +116,24 @@ var trHTML = '';
        .cnt223 a{
          text-decoration: none;
        }
+       #records_table {
+          margin: 0 auto;
+          text-align: center;
+          border-collapse: collapse;
+          width: 100%;
+          font-size: 15px;
+          color: gray;
+          line-height: 1.4;
+          background-color: #222;
+       }
+       th {
+        background-color: #222;
+        color: white;
+        height: 30px;
+        }
+        td{
+          height: 20px;
+        }
        .popup{
          width: 100%;
          margin: 0 auto;
@@ -141,6 +161,7 @@ var trHTML = '';
          font-size: 20px;
          font-family: sans-serif;
        }
+       tr:nth-child(even){background-color: #f2f2f2}
        .cnt223 p a{
          color: #d91900;
          font-weight: bold;
@@ -157,7 +178,7 @@ var trHTML = '';
          cursor: pointer;
        }
        #rcorners1 {
-    /**background-color: white;**/
+    background-color: white;
     margin-top: -15pt;
   margin-bottom: 10pt;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -328,11 +349,11 @@ var trHTML = '';
 
 
     </div>
-    <table id="records_table" border='1'>
+    <table id="records_table" style="width:90%;text-align:center" border='1', >
         <tr>
-            <th>Rank</th>
-            <th>Content</th>
-            <th>UID</th>
+            <th style="text-align: center;">Rank</th>
+            <th style="text-align: center;">Content</th>
+            <th style="text-align: center;">UID</th>
         </tr>
     </table>
   <div></div>
