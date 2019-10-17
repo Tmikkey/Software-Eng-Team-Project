@@ -12,6 +12,9 @@
     var myViewModel;
     var response = '[{"rank":"9","content":"Alon","UID":"5"},{"rank":"6","content":"Tala","UID":"6"}]';
     $(document).ready(function() {
+      document.getElementById("routeform").addEventListener("click", function(event){
+        event.preventDefault()
+      });
           var overlay = $('<div id="overlay"></div>');
           overlay.show();
           overlay.appendTo(document.body);
@@ -76,7 +79,77 @@ var trHTML = '';
             }
         });
     }
-     
+    $("#formButton").click(function(){
+      $("#routeform").validate({
+            rules: {
+              fromid: {
+                required: true
+              }, 
+              toid: {
+                required: true
+              }, 
+              dateid: {
+                required: true
+              }
+            }, 
+            messages: {
+              fromid: {
+                required: "<div style='text-align:center; color: red; margin-top:5px'>Invalid input</div>"
+              }, 
+              toid: {
+                required: "<div style='text-align:center; color: red'>Invalid input</div>"
+              }, 
+            dateid: "<div style='text-align:center; color: red'>Invalid input</div>"
+            },
+            submitHandler: subform2
+          })
+      function subform2() {
+            var data = $("#routeform").serialize();
+            $.ajax({
+              type: 'POST',
+              url: '',
+              data: data,
+              beforeSend: function() {
+                $("#info").fadeOut();
+                $("#formButton").html("Sending...");
+                }, success: function(resp) {
+                  $("#formButton").html("<img src = 'ajax-loader.gif' width = '15'/> &nbsp: Sign Up");
+                  updateItem2(resp);
+              },
+              error: function (request, status, error) {
+                $("#info").fadeIn(1000, function() {
+                   $("#info").html("<div class = 'alert alert-danger'>"+resp+"</div>");
+                  $("#formButton").html("Sign Up");
+                });
+            }
+            })
+          }
+          function updateItem2(response) {
+// convert string to JSON
+var jsonData = '[{"rank":"9","content":"Alon","UID":"5"},{"rank":"6","content":"Tala","UID":"6"}]';
+var response = '[{"rank":"9","content":"Alon","UID":"5"},{"rank":"6","content":"Tala","UID":"6"}]';
+response = $.parseJSON(response);
+// $.ajax({
+//     url: '/echo/json/',
+//     type: 'POST',
+//     data: {
+//         json: jsonData
+//     },
+//     success: function (response) {
+//         var trHTML = '';
+//         $.each(response, function (i, item) {
+//             trHTML += '<tr><td>' + item.rank + '</td><td>' + item.content + '</td><td>' + item.UID + '</td></tr>';
+//         });
+//         $('#records_table').append(trHTML);
+//     }
+// });
+var trHTML = '';
+        $.each(response, function (i, item) {
+            trHTML += '<tr><td>' + item.rank + '</td><td>' + item.content + '</td><td>' + item.UID + '</td></tr>';
+        });
+        $('#routes_table').append(trHTML);
+    }
+          });
 });
     </script>
      <style>
@@ -88,8 +161,8 @@ var trHTML = '';
     }
 
     .bg {
-        /* The image used */
-        background-image: url("back3.jpg");
+        /* The image used 
+        background-image: url("back3.jpg");*/
 
         /* Full height */
         height: 100%;
@@ -179,8 +252,9 @@ var trHTML = '';
        }
        #rcorners1 {
     background-color: white;
-    margin-top: -15pt;
-  margin-bottom: 10pt;
+    margin-top: 20pt;
+  margin-bottom: 0pt;
+  height: 113px;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 .text-center{
@@ -201,7 +275,7 @@ var trHTML = '';
    <img src="PicsArt_10-05-10.27.58.jpg" width="70" height="70">
 
     <ul>
-      <li><a href="#">Main</a></li>
+      <li><a href="Index.html">Main</a></li>
       <li><a href="LogSign.html">Log In</a></li>
       <li><a href="#">About Us</a></li>
       <li><a href="#">Get in Touch</a></li>
@@ -213,20 +287,20 @@ var trHTML = '';
       </div>
       <div class="text-center" >
   
-      <form class="form-inline">
+      <form method = "post" id = "routeform"class="form-inline">
           <div class="form-group">
               <label for="exampleInputName2">From</label>
-              <input type="text" class="form-control" id="exampleInputName2" placeholder="From">
+              <input type="text" class="form-control" name = "fromid" id="fromid" placeholder="From">
           </div>
           <div class="form-group">
               <label for="exampleInputEmail2">To</label>
-              <input type="text" class="form-control" id="exampleInputEmail2" placeholder="To">
+              <input type="text" class="form-control" name = "toid" id="toid" placeholder="To">
           </div>
           <div class="form-group">
               <label for="exampleInputDate2">Date</label>
-              <input type="date" class="form-control" id="exampleInputEmail2" placeholder="Date">
+              <input type="date" class="form-control" name = "dateid" id="dateid" placeholder="Date">
           </div>
-          <button type="submit" class="btn btn-success2">Send</button>
+          <button type="submit" id = "formButton" class="btn btn-success2">Send</button>
       </form>
       </div>
       <script type='text/javascript'>
@@ -356,6 +430,13 @@ var trHTML = '';
             <th style="text-align: center;">UID</th>
         </tr>
     </table>
+    <table id="routes_table" style="width:90%;text-align:center" border='1', >
+      <tr>
+          <th style="text-align: center;">Rank</th>
+          <th style="text-align: center;">Content</th>
+          <th style="text-align: center;">UID</th>
+      </tr>
+  </table>
   <div></div>
 
   </body>

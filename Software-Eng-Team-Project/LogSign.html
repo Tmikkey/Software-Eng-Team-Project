@@ -59,15 +59,24 @@
                 $("#info").fadeOut();
                 $("#login").html("Sending...");
                 }, success: function(resp) {
-                if (resp=='ok') {
                   $("#login").html("<img src = 'ajax-loader.gif' width = '15'/> &nbsp: Login");
-                } else {
+                  var token = resp;
+                // if (resp=='ok') {
+                //   $("#login").html("<img src = 'ajax-loader.gif' width = '15'/> &nbsp: Login");
+                // } else {
+                //   $("#info").fadeIn(1000, function() {
+                //     $("#info").html("<div class = 'alert alert-danger'>"+resp+"</div>");
+                //     $("#login").html("Login");
+                //   });
+                // }
+              },
+              error: function (request, status, error) {
+                  alert(request.responseText);
                   $("#info").fadeIn(1000, function() {
-                    $("#info").html("<div class = 'alert alert-danger'>"+resp+"</div>");
-                    $("#login").html("Login");
-                  });
-                }
-              }
+                  $("#info").html("<div class = 'alert alert-danger'>"+resp+"</div>");
+                  $("#login").html("Login");
+              })
+            }
             })
           }
           $("#signupform").validate({
@@ -98,9 +107,9 @@
               }, 
               Email: "<div style='text-align:center; color: red'>Invalid input</div>"
             }, 
-            submitHandler: subform
+            submitHandler: subform1
           })
-          function subform() {
+          function subform1() {
             var data = $("#signupform").serialize();
             $.ajax({
               type: 'POST',
@@ -110,15 +119,22 @@
                 $("#info").fadeOut();
                 $("#signup").html("Sending...");
                 }, success: function(resp) {
-                if (reps=='ok') {
-                  $("#signup").html("<img src = 'ajax-loader.gif' width = '15'/> &nbsp: Sign U");
-                } else {
-                  $("#info").fadeIn(1000, function() {
-                    $("#info").html("<div class = 'alert alert-danger'>"+resp+"</div>");
-                    $("#signup").html("Sign Up");
-                  });
-                }
-              }
+                  $("#signup").html("<img src = 'ajax-loader.gif' width = '15'/> &nbsp: Sign Up");
+                // if (reps=='ok') {
+                //   $("#signup").html("<img src = 'ajax-loader.gif' width = '15'/> &nbsp: Sign U");
+                // } else {
+                //   $("#info").fadeIn(1000, function() {
+                //     $("#info").html("<div class = 'alert alert-danger'>"+resp+"</div>");
+                //     $("#signup").html("Sign Up");
+                //   });
+                // }
+              },
+              error: function (request, status, error) {
+                $("#info").fadeIn(1000, function() {
+                   $("#info").html("<div class = 'alert alert-danger'>"+resp+"</div>");
+                  $("#signup").html("Sign Up");
+                });
+            }
             })
           }
           $(".info-item .btn").click(function(){
@@ -135,7 +151,7 @@
          <img src="PicsArt_10-05-10.27.58.jpg" width="70" height="70">
       
           <ul>
-            <li><a href="#">Main</a></li>
+            <li><a href="Index.html">Main</a></li>
             <li><a href="LogSign.html">Log In</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="#">Get in Touch</a></li>

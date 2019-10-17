@@ -28,8 +28,8 @@ float:left;
 .navigation-bar ul {
   padding: 0px;
   margin: 0px;
-  text-align: center;
-  display:inline-block;
+  text-align: right;
+   
   vertical-align:top;
 }
 
