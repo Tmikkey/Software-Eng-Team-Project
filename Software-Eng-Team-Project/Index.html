@@ -12,9 +12,6 @@
     var myViewModel;
     var response = '[{"rank":"9","content":"Alon","UID":"5"},{"rank":"6","content":"Tala","UID":"6"}]';
     $(document).ready(function() {
-      document.getElementById("routeform").addEventListener("click", function(event){
-        event.preventDefault()
-      });
           var overlay = $('<div id="overlay"></div>');
           overlay.show();
           overlay.appendTo(document.body);
@@ -300,7 +297,8 @@ var trHTML = '';
               <label for="exampleInputDate2">Date</label>
               <input type="date" class="form-control" name = "dateid" id="dateid" placeholder="Date">
           </div>
-          <button type="submit" id = "formButton" class="btn btn-success2">Send</button>
+
+          <button type="button" class="btn btn-success2">Send</button>
       </form>
       </div>
       <script type='text/javascript'>
